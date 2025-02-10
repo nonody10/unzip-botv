@@ -5,11 +5,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config(object):
-    try:
-        APP_ID = int(os.environ.get("25465082"))  # Default value to avoid NoneType error
-    except ValueError:
-        raise ValueError("❌ APP_ID must be a valid integer. Please check your environment variables.")
-
     API_HASH = os.environ.get("API_HASH", "4a6b5e40c8bc08c8af09add6cca23b18")
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "7821525708:AAFkeXtKLVd3v9K-ZUPx3K4cP6n5uuc7Ajk")
     LOGS_CHANNEL = int(os.environ.get("LOGS_CHANNEL", "-1001628560294"))
