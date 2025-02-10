@@ -1,4 +1,4 @@
-FROM archlinux:latest
+FROM archlinux/base:latest
 
 RUN pacman -Syyu --noconfirm && \
     pacman -S --noconfirm ffmpeg gcc git p7zip python-pip tzdata zstd && \
