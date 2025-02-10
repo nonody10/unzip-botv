@@ -1,12 +1,11 @@
-FROM archlinux/base:latest
+FROM debian:latest
 
-RUN pacman -Syyu --noconfirm && \
-    pacman -S --noconfirm ffmpeg gcc git p7zip python-pip tzdata zstd && \
-    python3 -m venv /venv && \
-    pacman -Scc --noconfirm && \
+RUN apt update && apt upgrade -y && \
+    apt install -y ffmpeg gcc git p7zip-full python3-pip tzdata zstd && \
     ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
-ENV PATH="/venv/bin:$PATH"
 ENV TZ=Europe/Paris
+RUN python3 -m venv /venv
+ENV PATH="/venv/bin:$PATH"
 RUN pip3 install -U pip setuptools wheel && \
     mkdir /app
 WORKDIR /app
