@@ -6,7 +6,7 @@ load_dotenv()
 
 class Config(object):
     try:
-        APP_ID = int(os.environ.get("APP_ID", "25465082"))  # Default value to avoid NoneType error
+        APP_ID = int(os.environ.get("25465082"))  # Default value to avoid NoneType error
     except ValueError:
         raise ValueError("❌ APP_ID must be a valid integer. Please check your environment variables.")
 
