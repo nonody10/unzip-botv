@@ -3,7 +3,7 @@ import os
 
 
 class Config:
-    APP_ID = int(os.environ.get("APP_ID", '25465082'))
+    APP_ID = int(os.environ.get("APP_ID", 25465082))
     API_HASH = os.environ.get("API_HASH", "4a6b5e40c8bc08c8af09add6cca23b18")
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "7821525708:AAFkeXtKLVd3v9K-ZUPx3K4cP6n5uuc7Ajk")
     LOGS_CHANNEL = (
@@ -23,4 +23,4 @@ class Config:
     BOT_THUMB = f"{os.path.dirname(__file__)}/bot_thumb.jpg"
     MAX_CONCURRENT_TASKS = 75
     MAX_TASK_DURATION_EXTRACT = 120 * 60  # 2 hours (in seconds)
-    MAX_TASK_DURATION_MERGE = 240 * 60  # 4 hours (in seconds)
+    MAX_TASK_DURATION_MERGE = 120 * 60  # 4 hours (in seconds)
