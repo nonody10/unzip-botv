@@ -1,6 +1,9 @@
 # Copyright (c) 2022 - 2024 EDM115
 import os
+from dotenv import load_dotenv
 
+# Load .env variables if running locally
+load_dotenv()
 
 class Config(object):
     APP_ID = 25465082
