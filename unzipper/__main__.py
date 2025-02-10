@@ -19,34 +19,41 @@ from .modules.bot_data import Messages
 
 
 async def shutdown_bot():
+    """Handles bot shutdown procedures."""
     stoptime = time.strftime("%Y/%m/%d - %H:%M:%S")
     LOGGER.info(Messages.STOP_TXT.format(stoptime))
+
     try:
         await unzipperbot.send_message(
             chat_id=Config.LOGS_CHANNEL, text=Messages.STOP_TXT.format(stoptime)
         )
-        with open("unzip-log.txt", "rb") as doc_f:
-            try:
-                await unzipperbot.send_document(
-                    chat_id=Config.LOGS_CHANNEL,
-                    document=doc_f,
-                    file_name=doc_f.name,
-                )
-            except Exception as e:
-                LOGGER.error("Error sending document: %s", e)
+
+        # Send log file if it exists
+        if os.path.exists("unzip-log.txt"):
+            with open("unzip-log.txt", "rb") as doc_f:
+                try:
+                    await unzipperbot.send_document(
+                        chat_id=Config.LOGS_CHANNEL,
+                        document=doc_f,
+                        file_name=doc_f.name,
+                    )
+                except Exception as e:
+                    LOGGER.error("Error sending document: %s", e)
+
     except Exception as e:
         LOGGER.error("Error sending shutdown message: %s", e)
+
     finally:
         LOGGER.info("Bot stopped 😪")
         await unzipperbot.stop(block=False)
 
 
 def handler_stop_signals(signum, frame):
+    """Handles termination signals (SIGINT, SIGTERM)."""
     LOGGER.info(
-        "Received stop signal (%s, %s, %s). Exiting...",
+        "Received stop signal (%s, %s). Exiting...",
         signal.Signals(signum).name,
         signum,
-        frame,
     )
     asyncio.create_task(shutdown_bot())  # Run shutdown async function
 
@@ -56,19 +63,24 @@ signal.signal(signal.SIGTERM, handler_stop_signals)
 
 
 async def main():
+    """Main bot execution function."""
     try:
         os.makedirs(Config.DOWNLOAD_LOCATION, exist_ok=True)
         os.makedirs(Config.THUMB_LOCATION, exist_ok=True)
+
         LOGGER.info(Messages.STARTING_BOT)
         await unzipperbot.start()
+
         starttime = time.strftime("%Y/%m/%d - %H:%M:%S")
         await unzipperbot.send_message(
             chat_id=Config.LOGS_CHANNEL, text=Messages.START_TXT.format(starttime)
         )
+
         set_boot_time()
         dl_thumbs()
         LOGGER.info(Messages.CHECK_LOG)
-        if check_logs():
+
+        if await check_logs():  # Ensure 'await' is used if check_logs() is async
             LOGGER.info(Messages.LOG_CHECKED)
             removal(True)
             start_cron_jobs()
@@ -83,6 +95,7 @@ async def main():
             except Exception as e:
                 LOGGER.error("Error sending wrong log message: %s", e)
             await shutdown_bot()
+
     except Exception as e:
         LOGGER.error("Error in main loop: %s", e)
     finally:
