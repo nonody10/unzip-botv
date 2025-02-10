@@ -2,6 +2,7 @@
 import os
 import signal
 import time
+import asyncio
 
 from pyrogram import idle
 
@@ -18,50 +19,51 @@ from .modules.bot_data import Messages
 
 
 def handler_stop_signals(signum, frame):
+    """Handle stop signals and initiate shutdown."""
     LOGGER.info(
         "Received stop signal (%s, %s, %s). Exiting...",
         signal.Signals(signum).name,
         signum,
         frame,
     )
-    shutdown_bot()
+    asyncio.get_event_loop().run_until_complete(shutdown_bot())
 
 
-signal.signal(signal.SIGINT, handler_stop_signals)
-signal.signal(signal.SIGTERM, handler_stop_signals)
-
-
-def shutdown_bot():
+async def shutdown_bot():
+    """Shutdown the bot gracefully."""
     stoptime = time.strftime("%Y/%m/%d - %H:%M:%S")
     LOGGER.info(Messages.STOP_TXT.format(stoptime))
     try:
-        unzipperbot.send_message(
+        # Send shutdown message to logs channel
+        await unzipperbot.send_message(
             chat_id=Config.LOGS_CHANNEL, text=Messages.STOP_TXT.format(stoptime)
         )
+        # Send log file to logs channel
         with open("unzip-log.txt", "rb") as doc_f:
             try:
-                unzipperbot.send_document(
+                await unzipperbot.send_document(
                     chat_id=Config.LOGS_CHANNEL,
                     document=doc_f,
                     file_name=doc_f.name,
                 )
-            except:
-                pass
+            except Exception as e:
+                LOGGER.error("Error sending log file: %s", e)
     except Exception as e:
-        LOGGER.error("Error sending shutdown message : %s", e)
+        LOGGER.error("Error sending shutdown message: %s", e)
     finally:
         LOGGER.info("Bot stopped 😪")
-        unzipperbot.stop(block=False)
+        await unzipperbot.stop()
 
 
-if __name__ == "__main__":
+async def start_bot():
+    """Start the bot and perform initial checks."""
     try:
         os.makedirs(Config.DOWNLOAD_LOCATION, exist_ok=True)
         os.makedirs(Config.THUMB_LOCATION, exist_ok=True)
         LOGGER.info(Messages.STARTING_BOT)
-        unzipperbot.start()
+        await unzipperbot.start()
         starttime = time.strftime("%Y/%m/%d - %H:%M:%S")
-        unzipperbot.send_message(
+        await unzipperbot.send_message(
             chat_id=Config.LOGS_CHANNEL, text=Messages.START_TXT.format(starttime)
         )
         set_boot_time()
@@ -72,17 +74,26 @@ if __name__ == "__main__":
             removal(True)
             start_cron_jobs()
             LOGGER.info(Messages.BOT_RUNNING)
-            idle()
+            await idle()
         else:
             try:
-                unzipperbot.send_message(
+                await unzipperbot.send_message(
                     chat_id=Config.BOT_OWNER,
                     text=Messages.WRONG_LOG.format(Config.LOGS_CHANNEL),
                 )
-            except:
-                pass
-            shutdown_bot()
+            except Exception as e:
+                LOGGER.error("Error notifying bot owner: %s", e)
+            await shutdown_bot()
     except Exception as e:
-        LOGGER.error("Error in main loop : %s", e)
+        LOGGER.error("Error in main loop: %s", e)
     finally:
-        shutdown_bot()
+        await shutdown_bot()
+
+
+if __name__ == "__main__":
+    # Register signal handlers
+    signal.signal(signal.SIGINT, handler_stop_signals)
+    signal.signal(signal.SIGTERM, handler_stop_signals)
+
+    # Run the bot
+    asyncio.run(start_bot())
