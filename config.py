@@ -7,9 +7,6 @@ class Config:
     API_HASH = os.environ.get("API_HASH", "4a6b5e40c8bc08c8af09add6cca23b18")
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "7821525708:AAFkeXtKLVd3v9K-ZUPx3K4cP6n5uuc7Ajk")
     LOGS_CHANNEL = -1001628560294
-        #if os.environ.get("LOGS_CHANNEL").strip("-").isdigit()
-        #else os.environ.get("LOGS_CHANNEL")
-    )
     MONGODB_URL = os.environ.get("MONGODB_URL", "mongodb+srv://uhdprime:uhdprime@cluster0.ry5y4yk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
     MONGODB_DBNAME = os.environ.get("MONGODB_DBNAME", "Unzipper_Bot")
     BOT_OWNER = 6487118438
