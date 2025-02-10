@@ -13,7 +13,7 @@ plugins = dict(root="modules")
 unzipperbot = pyrogram.Client(
     "UnzipperBot",
     bot_token=Config.BOT_TOKEN,
-    api_id=25465082,
+    api_id=Config.APP_ID,
     api_hash=Config.API_HASH,
     plugins=plugins,
     sleep_threshold=10,
