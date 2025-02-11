@@ -233,7 +233,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                     )
                 except Exception as e:
                     LOGGER.warning(e)
-                    shutil.copy(Config.BOT_THUMB, thmb_pth)
+
                 try:
                     await unzip_bot.send_video(
                         chat_id=c_id,
