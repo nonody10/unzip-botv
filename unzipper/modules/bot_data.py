@@ -32,7 +32,7 @@ class Messages:
 
     DELETE = "Delete 🚮"
 
-    RATE = "Rate me ⭐"
+    RATE = "Buy Premium ⭐"
 
     # start.py
 
@@ -149,7 +149,7 @@ Select the extraction mode for that merged file 👀
     EXT_CAPTION = """
 `{}`
 
-Successfully Extracted. 🥰
+**Join :- @AdultService**
     """
 
     REPORT_TEXT = """
@@ -222,21 +222,21 @@ Use **/merge** to start one
     ACTUAL_THUMB = "Your actual thumbnail"
 
     START_TEXT = """
-Hi **{}** 👋, I'm **UnZiperX bot** 🥰
+Hi **{}** 👋, I'm **ProUnZipBot** 🥰
 
-I can extract any Archive, Zip, with password or not, splitted, .001, .002, .003 Also... Send Files to Extract.
+I Can Extract Any Archive, Zip, RAR, With Password or Not, Alao Splitted .001, .002, .003 Files. Send Me Files to Extract.
 
-**Made with ❤️ by @AdultService**
+**Made With ❤️ by @AdultService** ⚡
     """
 
     HELP_TXT = """
-**• How to extract 🤔**
+**• How To Extract 🤔**
 
-**1)** Send the file or link that you want to extract
-**2)** Click on extract button (If you sent a link use `🔗` button. If it's a file just use `🗂️` button)
+    **1)** Send the file or link that you want to extract
+    **2)** Click on extract button (If you sent a link use `🔗` button. If it's a file just use `🗂️` button)
 
 
-**• How to change upload mode 🤔**
+**• How to Change Upload Mode 🤔**
     Send **/mode**
 
 **Note :**
@@ -849,10 +849,7 @@ class Buttons:
     RATE_ME = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(
-                    Messages.RATE, url="https://t.me/AdultService/2"
-                ),
-                InlineKeyboardButton(Messages.DONATE, callback_data="donatecallback"),
+                InlineKeyboardButton(Messages.RATE, url="https://t.me/AdultService/3"),
             ],
         ]
     )
