@@ -53,8 +53,8 @@ Bot restarted !
     """
 
     RESEND_TASK = """
-⚠️ **Warning** : the bot restarted while you were using it
-Your task was stopped, kindly send it again
+⚠️ **Warning** : Bot Restarted! 
+While you were using it. Your task was stopped, kindly send it again.
     """
 
     TASK_EXPIRED = """
@@ -66,7 +66,7 @@ Don't go AFK next time 😉
     # database.py
 
     BANNED = """
-**Sorry, You're banned 💀**
+**Sorry, You're Banned 💀**
 
 Report this at @ORGSupports if you think this is a mistake, I may unban you.
     """
@@ -133,10 +133,20 @@ Sorry, the bot is currently full 🥺
 
     CHOOSE_EXT_MODE = """
 Select the extraction mode for that {} 👀
+
+🗂️ : **Normal mode**
+🔐 : **Password Protected**
+🖼️ : **Change the Thumbnail**
+✏ : **Change the thumbnail and rename the file**
+❌ : **Cancel your Task**
     """
 
     CHOOSE_EXT_MODE_MERGE = """
 Select the extraction mode for that merged file 👀
+
+🗂️ : **Normal mode**
+🔐 : **Password protected**
+❌ : **Cancel your task**
     """
 
     EXT_CAPTION = """
@@ -218,7 +228,7 @@ Use **/merge** to start one
     START_TEXT = """
 Hi **{}** 👋, I'm **ProUnZipBot** 🥰
 
-I Can Extract Any Archive, Zip, RAR, With Password or Not, Alao Splitted .001, .002, .003 Files. Send Me Files to Extract.
+I Can Extract Any Archive, Zip, RAR, With Password or Not, Also Splitted .001, .002, .00x Files. Send Me Files For Extract Here.
 
 **Made With ❤️ by @AdultService** ⚡
     """
@@ -717,7 +727,16 @@ class Buttons:
     CHOOSE_E_F__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Extract 🗂️", callback_data="extract_file|tg_file|no_pass")
+                InlineKeyboardButton("Normal 🗂️", callback_data="extract_file|tg_file|no_pass"),
+                InlineKeyboardButton(
+                    "Locked 🔐", callback_data="extract_file|tg_file|with_pass"
+                ),
+            ],
+            [
+                InlineKeyboardButton("Set Thumb 🖼️", callback_data="extract_file|tg_file|thumb"),
+                InlineKeyboardButton(
+                    "Rename ✏", callback_data="extract_file|tg_file|thumbrename"
+                ),
             ],
             [InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
         ]
@@ -726,17 +745,22 @@ class Buttons:
     CHOOSE_E_F_M__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Merge 🗂️", callback_data="merged|no_pass"),
-                InlineKeyboardButton("Merge 🔐", callback_data="merged|with_pass"),
+                InlineKeyboardButton("🗂️", callback_data="merged|no_pass"),
+                InlineKeyboardButton("🔐", callback_data="merged|with_pass"),
             ],
-            [InlineKeyboardButton("❌", callback_data="cancel_dis")],
+            [InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
         ]
     )
 
     CHOOSE_E_U__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Extract 🔗", callback_data="extract_file|url|no_pass")
+                InlineKeyboardButton("Normal 🔗", callback_data="extract_file|url|no_pass"),
+                InlineKeyboardButton("Locked 🔐", callback_data="extract_file|url|with_pass"),
+            ],
+            [
+                InlineKeyboardButton("Set Thumb 🖼️", callback_data="extract_file|url|thumb"),
+                InlineKeyboardButton("Rename ✏", callback_data="extract_file|url|thumbrename"),
             ],
             [InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
         ]
