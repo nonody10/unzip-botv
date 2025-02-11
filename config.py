@@ -1,4 +1,8 @@
 import os
+from dotenv import load_dotenv
+
+# Load .env variables if running locally
+load_dotenv()
 
 class Config(object):
     try:
