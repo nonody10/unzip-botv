@@ -222,10 +222,9 @@ Use **/merge** to start one
     ACTUAL_THUMB = "Your actual thumbnail"
 
     START_TEXT = """
-Hi **{}** 👋, I'm **Unarchiver bot** 🥰
+Hi **{}** 👋, I'm **UnZiperX bot** 🥰
 
-I can extract any archive, with password or not, splitted, …
-Send **/commands** to learn more
+I can extract any Archive, Zip, with password or not, splitted, .001, .002, .003 Also... Send Files to Extract.
 
 **Made with ❤️ by @AdultService**
     """
