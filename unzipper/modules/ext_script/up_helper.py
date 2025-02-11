@@ -260,8 +260,8 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                             chat_id=c_id,
                             video=doc_f,
                             caption=Messages.EXT_CAPTION.format(fname),
-                            duration=0,
-                            thumb=str(Config.BOT_THUMB),
+                            duration=int(vid_duration) if vid_duration.isnumeric() else 0,
+                            thumb=str(thmb_pth),
                             disable_notification=True,
                             progress=progress_for_pyrogram,
                             progress_args=(
