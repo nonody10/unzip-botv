@@ -727,10 +727,9 @@ class Buttons:
     CHOOSE_E_F__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Extract 🗂️", callback_data="extract_file|tg_file|no_pass")
+                InlineKeyboardButton("Extract 🗂️", callback_data="extract_file|tg_file|no_pass"),
             ],
-            [
-                InlineKeyboardButton("❌", callback_data="cancel_dis")],
+            [InlineKeyboardButton("❌", callback_data="cancel_dis")],
         ]
     )
 
@@ -740,18 +739,16 @@ class Buttons:
                 InlineKeyboardButton("Merge 🗂️", callback_data="merged|no_pass"),
                 InlineKeyboardButton("Merge 🔐", callback_data="merged|with_pass"),
             ],
-            [
-                InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
+            [InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
         ]
     )
 
     CHOOSE_E_U__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Extract 🔗", callback_data="extract_file|url|no_pass")
+                InlineKeyboardButton("Extract 🔗", callback_data="extract_file|url|no_pass"),
             ],
-            [
-                InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
+            [InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
         ]
     )
 
