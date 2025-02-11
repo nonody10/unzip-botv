@@ -1,5 +1,5 @@
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
+from .callbacks import *
 
 class Messages:
     # here
