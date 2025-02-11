@@ -388,8 +388,7 @@ That's not an archive 💀
     """
 
     DEF_NOT_AN_ARCHIVE = """
-This file is NOT an archive 😐
-If you believe it's an error, send the file to **@EDM115**
+This file is NOT an Archive 😐
     """
 
     PROCESSING2 = "`Processing… ⏳`"
@@ -543,7 +542,7 @@ It failed 😣 Retry
 If it fails again, it means that {} haven't started the bot yet (or deleted the chat), or he's private/banned/whatever
     """
 
-    REPORT_REPLY = "Reply to a message to report it to @EDM115"
+    REPORT_REPLY = "Reply to a Message to Report."
 
     REPORT_DONE = """
 Report sucessfully sent ! An answer will arrive soon
