@@ -188,9 +188,8 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                         ),
                     )
         elif ul_mode == "media" and fext in extentions_list["video"]:
-            ffmpeg_path = "/path/to/ffprobe"  # Change this to the actual path of ffprobe
             vid_duration = await run_shell_cmds(
-                f'{ffmpeg_path} -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "{doc_f}"'
+                f'ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "{doc_f}"'
             )
             if thumbornot:
                 thumb_image = Config.THUMB_LOCATION + "/" + str(c_id) + ".jpg"
@@ -234,7 +233,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                     )
                 except Exception as e:
                     LOGGER.warning(e)
-
+                    shutil.copy(Config.BOT_THUMB, thmb_pth)
                 try:
                     await unzip_bot.send_video(
                         chat_id=c_id,
@@ -256,20 +255,37 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                     except:
                         pass
                 except:
-                    await unzip_bot.send_document(
-                        chat_id=c_id,
-                        document=doc_f,
-                        caption=Messages.EXT_CAPTION.format(fname),
-                        force_document=True,
-                        disable_notification=True,
-                        progress=progress_for_pyrogram,
-                        progress_args=(
-                            Messages.TRY_UP.format(fname),
-                            upmsg,
-                            time(),
-                            unzip_bot,
-                        ),
-                    )
+                    try:
+                        await unzip_bot.send_video(
+                            chat_id=c_id,
+                            video=doc_f,
+                            caption=Messages.EXT_CAPTION.format(fname),
+                            duration=0,
+                            thumb=str(Config.BOT_THUMB),
+                            disable_notification=True,
+                            progress=progress_for_pyrogram,
+                            progress_args=(
+                                Messages.TRY_UP.format(fname),
+                                upmsg,
+                                time(),
+                                unzip_bot,
+                            ),
+                        )
+                    except:
+                        await unzip_bot.send_document(
+                            chat_id=c_id,
+                            document=doc_f,
+                            caption=Messages.EXT_CAPTION.format(fname),
+                            force_document=True,
+                            disable_notification=True,
+                            progress=progress_for_pyrogram,
+                            progress_args=(
+                                Messages.TRY_UP.format(fname),
+                                upmsg,
+                                time(),
+                                unzip_bot,
+                            ),
+                        )
         else:
             if thumbornot:
                 thumb_image = Config.THUMB_LOCATION + "/" + str(c_id) + ".jpg"
