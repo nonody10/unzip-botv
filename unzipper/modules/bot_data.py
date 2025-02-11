@@ -174,9 +174,10 @@ have been saved from the URL
    • Maybe your archive format isn't supported yet 😔
 
 
-**⚠ IN ALL CASES ⚠**, please send **/clean**, else you can't send any other task 🙂🔫
+**⚠ IN ALL CASES ⚠**
+Please send **/clean**, else you can't send any other task 🙂🔫
 
-Please Report this at @ORGSupports if you think this is a serious error.
+**Please Report this at @ORGSupports if you think this is a serious error.**
     """
 
     HOW_MANY_UPLOADED = "`{}` file(s) have been extracted from that archive"
@@ -333,7 +334,7 @@ Do you really want to delete your thumbnail ?
     """
 
     ERROR_TXT = """
-**Error happened 😕**
+**Error Happened 😕**
 
 `{}`
     """
