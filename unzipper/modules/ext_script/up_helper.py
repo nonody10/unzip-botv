@@ -256,37 +256,20 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                     except:
                         pass
                 except:
-                    try:
-                        await unzip_bot.send_video(
-                            chat_id=c_id,
-                            video=doc_f,
-                            caption=Messages.EXT_CAPTION.format(fname),
-                            duration=0,
-                            thumb=str(Config.BOT_THUMB),
-                            disable_notification=True,
-                            progress=progress_for_pyrogram,
-                            progress_args=(
-                                Messages.TRY_UP.format(fname),
-                                upmsg,
-                                time(),
-                                unzip_bot,
-                            ),
-                        )
-                    except:
-                        await unzip_bot.send_document(
-                            chat_id=c_id,
-                            document=doc_f,
-                            caption=Messages.EXT_CAPTION.format(fname),
-                            force_document=True,
-                            disable_notification=True,
-                            progress=progress_for_pyrogram,
-                            progress_args=(
-                                Messages.TRY_UP.format(fname),
-                                upmsg,
-                                time(),
-                                unzip_bot,
-                            ),
-                        )
+                    await unzip_bot.send_document(
+                        chat_id=c_id,
+                        document=doc_f,
+                        caption=Messages.EXT_CAPTION.format(fname),
+                        force_document=True,
+                        disable_notification=True,
+                        progress=progress_for_pyrogram,
+                        progress_args=(
+                            Messages.TRY_UP.format(fname),
+                            upmsg,
+                            time(),
+                            unzip_bot,
+                        ),
+                    )
         else:
             if thumbornot:
                 thumb_image = Config.THUMB_LOCATION + "/" + str(c_id) + ".jpg"
