@@ -60,7 +60,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
             pass
         return
     try:
-        ul_mode = await get_upload_mode(c_id) or "media"  # Default to media
+        ul_mode = "media"  # Default to media
         fname = os.sep.join(os.path.abspath(doc_f).split(os.sep)[5:])
         fext = (pathlib.Path(os.path.abspath(doc_f)).suffix).casefold().replace(".", "")
         thumbornot = await thumb_exists(c_id)
