@@ -191,13 +191,18 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
             vid_duration = await run_shell_cmds(
                 f'ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "{doc_f}"'
             )
+            try:
+                vid_duration = int(float(vid_duration)) if vid_duration else 0
+            except (ValueError, TypeError):
+                vid_duration = 0
+                
             if thumbornot:
                 thumb_image = Config.THUMB_LOCATION + "/" + str(c_id) + ".jpg"
                 await unzip_bot.send_video(
                     chat_id=c_id,
                     video=doc_f,
                     caption=Messages.EXT_CAPTION.format(fname),
-                    duration=int(float(vid_duration)),
+                    duration=vid_duration,  # Use validated duration
                     thumb=thumb_image,
                     disable_notification=True,
                     progress=progress_for_pyrogram,
@@ -239,7 +244,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                         chat_id=c_id,
                         video=doc_f,
                         caption=Messages.EXT_CAPTION.format(fname),
-                        duration=int(vid_duration) if vid_duration.isnumeric() else 0,
+                        duration=vid_duration,  # Use validated duration
                         thumb=str(thmb_pth),
                         disable_notification=True,
                         progress=progress_for_pyrogram,
@@ -260,7 +265,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                             chat_id=c_id,
                             video=doc_f,
                             caption=Messages.EXT_CAPTION.format(fname),
-                            duration=0,
+                            duration=vid_duration,  # Use validated duration
                             thumb=str(Config.BOT_THUMB),
                             disable_notification=True,
                             progress=progress_for_pyrogram,
