@@ -134,7 +134,7 @@ Sorry, the bot is currently full 🥺
     CHOOSE_EXT_MODE = """
 Select the extraction mode for that {} 👀
 
-🗂️ : **Normal mode**
+🗂️ : **Extract/UnZip Files**
 🔐 : **Password Protected**
 🖼️ : **Change the Thumbnail**
 ✏ : **Change the thumbnail and rename the file**
@@ -144,7 +144,7 @@ Select the extraction mode for that {} 👀
     CHOOSE_EXT_MODE_MERGE = """
 Select the extraction mode for that merged file 👀
 
-🗂️ : **Normal mode**
+🗂️ : **Extract/UnZip Files**
 🔐 : **Password protected**
 ❌ : **Cancel your task**
     """
@@ -727,9 +727,9 @@ class Buttons:
     CHOOSE_E_F__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Normal 🗂️", callback_data="extract_file|tg_file|no_pass"),
+                InlineKeyboardButton("Extract/UnZip 🗂️", callback_data="extract_file|tg_file|no_pass"),
                 InlineKeyboardButton(
-                    "Locked 🔐", callback_data="extract_file|tg_file|with_pass"
+                    "Extract via Pass 🔐", callback_data="extract_file|tg_file|with_pass"
                 ),
             ],
             [
@@ -755,8 +755,8 @@ class Buttons:
     CHOOSE_E_U__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Normal 🔗", callback_data="extract_file|url|no_pass"),
-                InlineKeyboardButton("Locked 🔐", callback_data="extract_file|url|with_pass"),
+                InlineKeyboardButton("Extract/UnZip 🔗", callback_data="extract_file|url|no_pass"),
+                InlineKeyboardButton("Extract via Pass 🔐", callback_data="extract_file|url|with_pass"),
             ],
             [
                 InlineKeyboardButton("Set Thumb 🖼️", callback_data="extract_file|url|thumb"),
