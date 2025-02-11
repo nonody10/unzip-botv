@@ -638,8 +638,8 @@ Here's all the commands that only the owner (you) can use :
 **/getthumbs** : Get all the thumbnails on the server
 **/cleanall** : Same as `/clean`, but for the whole server
 **/cleantasks** : Same as `/cleanall`, plus removes them from the database
-**/logs** : Send you the logs (all of them). Useful for bug tracking. Send them to **@EDM115** if you don't understand them/need help
-**/restart** : Does a basic restart, less intrusive as the `/redbutton` one
+**/logs** : Send you the logs.txt
+**/restart** : Restart
 **/eval {code}** : Evaluate a piece of code. Useful for debugging
 **/exec {code}** : Execute a piece of code. Useful for debugging
     """
