@@ -134,16 +134,10 @@ Sorry, the bot is currently full 🥺
 
     CHOOSE_EXT_MODE = """
 Select the extraction mode for that {} 👀
-
-{} : **Extract Zip**
-❌ : **Cancel your task**
     """
 
     CHOOSE_EXT_MODE_MERGE = """
 Select the extraction mode for that merged file 👀
-
-🗂️ : **Extract Zip**
-❌ : **Cancel your task**
     """
 
     EXT_CAPTION = """
