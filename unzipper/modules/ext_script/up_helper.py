@@ -189,7 +189,8 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                     )
         elif ul_mode == "media" and fext in extentions_list["video"]:
             vid_duration = await run_shell_cmds(
-                f'ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "{doc_f}"'
+                f'ffprobe -v error -select_streams v:0 -show_entries format=duration '
+                f'-of default=noprint_wrappers=1:nokey=1 -analyzeduration 100M -probesize 100M "{doc_f}"'
             )
             if thumbornot:
                 thumb_image = Config.THUMB_LOCATION + "/" + str(c_id) + ".jpg"
