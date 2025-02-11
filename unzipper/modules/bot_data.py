@@ -342,8 +342,6 @@ Do you really want to delete your thumbnail ?
 **Error happened 😕**
 
 `{}`
-
-Please report this at @EDM115_chat if you think this is a serious error
     """
 
     CANCELLED_TXT = "**{} ✅**"
