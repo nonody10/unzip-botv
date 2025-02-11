@@ -126,16 +126,6 @@ async def about_me(_, message: Message):
         await sleep(f.value)
         await about_me(_, message)
 
-
-@unzipperbot.on_message(filters.command("privacy"))
-async def privacy_text(_, message: Message):
-    try:
-        await message.reply_text(text=Messages.PRIVACY)
-    except FloodWait as f:
-        await sleep(f.value)
-        await privacy_text(_, message)
-
-
 @unzipperbot.on_message(
     filters.incoming
     & filters.private
@@ -333,26 +323,6 @@ async def broadcast_this(_, message: Message):
         )
 
 
-@unzipperbot.on_message(filters.command("sendto") & filters.user(Config.BOT_OWNER))
-async def send_this(_, message: Message):
-    sd_msg = await message.reply(Messages.PROCESSING2)
-    r_msg = message.reply_to_message
-    if not r_msg:
-        await sd_msg.edit(Messages.SEND_REPLY)
-        return
-    try:
-        user_id = message.text.split(None, 1)[1]
-    except:
-        await sd_msg.edit(Messages.PROVIDE_UID)
-        return
-    await sd_msg.edit(Messages.SENDING)
-    send = await _do_broadcast(message=r_msg, user=user_id)
-    if send == 200:
-        await sd_msg.edit(Messages.SEND_SUCCESS.format(user_id))
-    else:
-        await sd_msg.edit(Messages.SEND_FAILED.format(user_id))
-
-
 @unzipperbot.on_message(filters.command("report"))
 async def report_this(_, message: Message):
     sd_msg = await message.reply(Messages.PROCESSING2)
@@ -411,57 +381,6 @@ async def unban_user(_, message: Message):
         await unban_msg.edit(Messages.UNBANNED.format(user_id))
 
 
-@unzipperbot.on_message(filters.private & filters.command("info"))
-async def me_stats(_, message: Message):
-    me_info = await unzipperbot.ask(
-        chat_id=message.chat.id,
-        text=Messages.INFO,
-    )
-    await unzipperbot.send_message(chat_id=message.chat.id, text=f"`{me_info}`")
-
-
-@unzipperbot.on_message(filters.command("user") & filters.user(Config.BOT_OWNER))
-async def info_user(_, message: Message):
-    await message.reply(Messages.USER)
-    info_user_msg = await message.reply(Messages.PROCESSING2)
-    try:
-        user_id = message.text.split(None, 1)[1]
-    except:
-        await info_user_msg.edit(Messages.PROVIDE_UID)
-        return
-    up_count = get_uploaded(user_id)
-    if up_count == "":
-        up_count = Messages.UNABLE_FETCH
-    await info_user_msg.edit(Messages.USER_INFO.format(user_id, up_count))
-
-
-@unzipperbot.on_message(filters.command("user2") & filters.user(Config.BOT_OWNER))
-async def info_user2(_, message: Message):
-    user2_msg = await message.reply(Messages.PROCESSING2)
-    try:
-        user_id = message.text.split(None, 1)[1]
-    except:
-        await user2_msg.edit(Messages.PROVIDE_UID2)
-        return
-    try:
-        infos = await unzipperbot.get_users(user_id)
-    except:
-        await user2_msg.edit(Messages.UID_UNAME_INVALID)
-        return
-    if not isinstance(user_id, int):
-        try:
-            user_id = infos.id
-        except:
-            pass
-    await user2_msg.edit(Messages.USER2_INFO.format(infos, user_id))
-
-
-@unzipperbot.on_message(filters.command("self") & filters.user(Config.BOT_OWNER))
-async def info_self(_, message: Message):
-    self_infos = await unzipperbot.get_me()
-    await message.reply(f"`{self_infos}`")
-
-
 @unzipperbot.on_message(
     filters.private & filters.command("getthumbs") & filters.user(Config.BOT_OWNER)
 )
@@ -489,34 +408,6 @@ async def get_all_thumbs(_, message: Message):
             )
         except RPCError as e:
             LOGGER.error(e)
-
-
-@unzipperbot.on_message(
-    filters.private & filters.command("redbutton") & filters.user(Config.BOT_OWNER)
-)
-async def red_alert(_, message: Message):
-    await message.reply("🚧 WIP 🚧")
-    # restart the whole bot, maybe using execl
-    # but also need to stop currently ongoing processes…
-
-
-@unzipperbot.on_message(
-    filters.private & filters.command("maintenance") & filters.user(Config.BOT_OWNER)
-)
-async def maintenance_mode(_, message: Message):
-    mstatus = await get_maintenance()
-    text = Messages.MAINTENANCE.format(mstatus) + "\n\n" + Messages.MAINTENANCE_ASK
-    mess = await message.reply(text)
-    try:
-        newstate = message.text.split(None, 1)[1]
-    except:
-        await mess.edit(Messages.MAINTENANCE_FAIL)
-        return
-    if newstate not in ["True", "False"]:
-        await mess.edit(Messages.MAINTENANCE_FAIL)
-        return
-    await set_maintenance(newstate == "True")
-    await message.reply(Messages.MAINTENANCE_DONE.format(newstate))
 
 
 @unzipperbot.on_message(filters.private & filters.command("addthumb"))
@@ -609,39 +500,6 @@ async def restart(_, message: Message):
     LOGGER.info(Messages.RESTARTING.format(message.from_user.id))
     clear_logs()
     os.execl(executable, executable, "-m", "unzipper")
-
-
-@unzipperbot.on_message(
-    filters.private & filters.command("gitpull") & filters.user(Config.BOT_OWNER)
-)
-async def pull_updates(_, message: Message):
-    git_reply = await message.reply(Messages.PULLING)
-    repo = git.Repo("/app")
-    current = repo.head.commit
-    repo.remotes.origin.pull()
-    if current != repo.head.commit:
-        await git_reply.edit(Messages.PULLED)
-        await restart(_, message)
-    else:
-        await git_reply.edit(Messages.NO_PULL)
-
-
-@unzipperbot.on_message(filters.command("donate"))
-async def donate_help(_, message: Message):
-    await message.reply(Messages.DONATE_TEXT)
-
-
-@unzipperbot.on_message(filters.command("vip"))
-async def vip_help(_, message: Message):
-    await message.reply(Messages.VIP_INFO)
-
-
-@unzipperbot.on_message(
-    filters.private & filters.command("dbexport") & filters.user(Config.BOT_OWNER)
-)
-async def export_db(_, message):
-    await message.reply("🚧 WIP 🚧")
-    # Will use https://www.mongodb.com/docs/database-tools/mongoexport/ on command to export as CSV
 
 
 @unzipperbot.on_message(filters.command("commands"))
