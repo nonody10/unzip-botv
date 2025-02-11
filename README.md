@@ -160,11 +160,6 @@ docker push edm115/unzip-bot:latest
 
 *(same, replace accordingly)*
 
-## Found a bug 🐞
-
-If you found a bug in this bot please open an [issue](https://github.com/EDM115/unzip-bot/issues) or report it on Telegram : [@EDM115](https://t.me/EDM115)  
-Same if you have any feature request 😉
-
 ## License & Copyright 👮‍♀️
 
 ```
