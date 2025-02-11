@@ -726,26 +726,17 @@ class Buttons:
     CHOOSE_E_F__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("🗂️", callback_data="extract_file|tg_file|no_pass"),
-                InlineKeyboardButton(
-                    "🔐", callback_data="extract_file|tg_file|with_pass"
-                ),
+                InlineKeyboardButton("Extract 🗂️", callback_data="extract_file|tg_file|no_pass")
             ],
-            [
-                InlineKeyboardButton("🖼️", callback_data="extract_file|tg_file|thumb"),
-                InlineKeyboardButton(
-                    "✏", callback_data="extract_file|tg_file|thumbrename"
-                ),
-            ],
-            [InlineKeyboardButton("❌", callback_data="cancel_dis")],
+            [InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
         ]
     )
 
     CHOOSE_E_F_M__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("🗂️", callback_data="merged|no_pass"),
-                InlineKeyboardButton("🔐", callback_data="merged|with_pass"),
+                InlineKeyboardButton("Merge 🗂️", callback_data="merged|no_pass"),
+                InlineKeyboardButton("Merge 🔐", callback_data="merged|with_pass"),
             ],
             [InlineKeyboardButton("❌", callback_data="cancel_dis")],
         ]
@@ -754,21 +745,16 @@ class Buttons:
     CHOOSE_E_U__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("🔗", callback_data="extract_file|url|no_pass"),
-                InlineKeyboardButton("🔐", callback_data="extract_file|url|with_pass"),
+                InlineKeyboardButton("Extract 🔗", callback_data="extract_file|url|no_pass")
             ],
-            [
-                InlineKeyboardButton("🖼️", callback_data="extract_file|url|thumb"),
-                InlineKeyboardButton("✏", callback_data="extract_file|url|thumbrename"),
-            ],
-            [InlineKeyboardButton("❌", callback_data="cancel_dis")],
+            [InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
         ]
     )
 
     RENAME = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("✏", callback_data="renameit"),
+                InlineKeyboardButton("Rename ✏", callback_data="renameit"),
                 InlineKeyboardButton("🙅‍♂️", callback_data="norename"),
             ]
         ]
@@ -864,7 +850,7 @@ class Buttons:
         [
             [
                 InlineKeyboardButton(
-                    Messages.RATE, url="https://t.me/BotsArchive/2705"
+                    Messages.RATE, url="https://t.me/AdultService/2"
                 ),
                 InlineKeyboardButton(Messages.DONATE, callback_data="donatecallback"),
             ],
