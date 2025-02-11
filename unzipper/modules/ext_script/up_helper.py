@@ -60,7 +60,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
         ul_mode = await get_upload_mode(c_id)
         fname = os.sep.join(os.path.abspath(doc_f).split(os.sep)[5:])
         fext = (pathlib.Path(os.path.abspath(doc_f)).suffix).casefold().replace(".", "")
-        thumbornot = await thumb_exists(c_id)
+        thumbornot = await thumb_exists(c_id) if fsize > 50 * 1024 * 1024 else None
         upmsg = await unzipperbot.send_message(
             c_id, Messages.PROCESSING2, disable_notification=True
         )
@@ -76,7 +76,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                 duration=metadata["duration"],
                 performer=metadata["performer"],
                 title=metadata["title"],
-                thumb=thumb_image if thumbornot else None,
+                thumb=thumb_image,
                 disable_notification=True,
                 progress=progress_for_pyrogram,
                 progress_args=(
@@ -105,7 +105,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                 await unzip_bot.send_document(
                     chat_id=c_id,
                     document=doc_f,
-                    thumb=thumb_image if thumbornot else None,
+                    thumb=thumb_image,
                     caption=Messages.EXT_CAPTION.format(fname),
                     force_document=True,
                     disable_notification=True,
@@ -126,7 +126,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
                 video=doc_f,
                 caption=Messages.EXT_CAPTION.format(fname),
                 duration=int(float(vid_duration)) if vid_duration.replace(".", "").isnumeric() else 0,
-                thumb=thumb_image if thumbornot else None,
+                thumb=thumb_image if thumbornot else "video_generated_thumb.jpg",
                 disable_notification=True,
                 progress=progress_for_pyrogram,
                 progress_args=(
@@ -140,7 +140,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
             await unzip_bot.send_document(
                 chat_id=c_id,
                 document=doc_f,
-                thumb=thumb_image if thumbornot else None,
+                thumb=thumb_image,
                 caption=Messages.EXT_CAPTION.format(fname),
                 force_document=True,
                 disable_notification=True,
@@ -169,7 +169,6 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
     except BaseException as e:
         LOGGER.error(e)
         shutil.rmtree(full_path)
-
 
 async def forward_file(message, cid):
     try:
