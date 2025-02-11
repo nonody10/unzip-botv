@@ -1,3 +1,4 @@
+pyrogram
 python-dotenv
 ffmpeg-python
 aiocron==1.8
@@ -12,7 +13,6 @@ mutagen==1.47.0
 Pillow==11.1.0
 psutil==6.1.1
 pykeyboard==0.1.5
-pyrogram==2.0.106
 pyromod==1.5
 requests==2.32.3
 TgCrypto==1.2.5
