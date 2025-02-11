@@ -22,7 +22,7 @@ class Config(object):
     THUMB_LOCATION = f"{os.path.dirname(__file__)}/Thumbnails"
     TG_MAX_SIZE = 2097152000
     MAX_MESSAGE_LENGTH = 4096
-    CHUNK_SIZE = 1024 * 1024 * 10  # 10 MB
+    CHUNK_SIZE = 1024 * 1024 * 50  # 50 MB
     BOT_THUMB = f"{os.path.dirname(__file__)}/bot_thumb.jpg"
     MAX_CONCURRENT_TASKS = 75
     MAX_TASK_DURATION_EXTRACT = 120 * 60  # 2 hours
