@@ -1,11 +1,8 @@
-# Copyright (c) 2022 - 2024 EDM115
 import os
 import signal
 import time
 import asyncio
-
 from pyrogram import idle
-
 from config import Config
 from . import LOGGER, unzipperbot
 from .helpers.start import (
@@ -26,7 +23,7 @@ def handler_stop_signals(signum, frame):
         signum,
         frame,
     )
-    asyncio.get_event_loop().run_until_complete(shutdown_bot())
+    asyncio.create_task(shutdown_bot())  # Fix: Use create_task instead of run_until_complete
 
 
 async def shutdown_bot():
@@ -34,11 +31,9 @@ async def shutdown_bot():
     stoptime = time.strftime("%Y/%m/%d - %H:%M:%S")
     LOGGER.info(Messages.STOP_TXT.format(stoptime))
     try:
-        # Send shutdown message to logs channel
         await unzipperbot.send_message(
             chat_id=Config.LOGS_CHANNEL, text=Messages.STOP_TXT.format(stoptime)
         )
-        # Send log file to logs channel
         with open("unzip-log.txt", "rb") as doc_f:
             try:
                 await unzipperbot.send_document(
@@ -52,6 +47,9 @@ async def shutdown_bot():
         LOGGER.error("Error sending shutdown message: %s", e)
     finally:
         LOGGER.info("Bot stopped 😪")
+        tasks = [t for t in asyncio.all_tasks() if t is not asyncio.current_task()]
+        [task.cancel() for task in tasks]
+        await asyncio.gather(*tasks, return_exceptions=True)  # Wait for all tasks to complete
         await unzipperbot.stop()
 
 
@@ -95,5 +93,9 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, handler_stop_signals)
     signal.signal(signal.SIGTERM, handler_stop_signals)
 
-    # Run the bot
-    asyncio.run(start_bot())
+    # Fix: Properly check if event loop is already running
+    loop = asyncio.get_event_loop()
+    if loop.is_running():
+        loop.create_task(start_bot())
+    else:
+        loop.run_until_complete(start_bot())
