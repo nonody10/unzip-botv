@@ -260,31 +260,6 @@ Made with ❤️ by **@AdultService**
 No Need To Donate 😊
     """
 
-    VIP_INFO = """
---**NOT AVAILABLE YET !**--
-    """
-
-    VIP_REQUIRED_MESSAGE = """
---**NOT AVAILABLE YET !**--
-    """
-
-    VIP_ADDED_USER = """
-The following user had been added with the following infos :
-User ID : `{}`
-Start date : `{}`
-End date : `{}`
-Platform : `{}`
-Frequency : `{}`
-Early supporter : `{}`
-Donator : `{}`
-First subscription date : `{}`
-Successful payments : `{}`
-Gap between payments : `{}`
-Gifted : `{}`
-Referral code : `{}`
-Lifetime : `{}`
-    """
-
     CLEAN_TXT = """
 **Are You Sure? Want to clean your task 🤔**
 
@@ -482,10 +457,6 @@ Please send the new file name (**--INCLUDE THE FILE EXTENTION !--**)
 
     PROCESS_CANCELLED = "❌ Process cancelled"
 
-    # commands.py
-
-    PRIVACY = "PRIVACY ??"
-
     PROCESS_RUNNING = """
 Already one process is running, don't spam 😐
 
@@ -621,48 +592,6 @@ Note : if you need to reply to replies, always use that /report command.
 **User ID :** `{}`
     """
 
-    INFO = "Send a text (shorter possible) from any user/chat. And you will have infos about it 👀"
-
-    USER = "This is a WIP command that would allow you to get more stats about your utilisation of me 🤓"
-
-    UNABLE_FETCH = "Unable to fetch"
-
-    USER_INFO = """
-**User ID :** `{}`
-`{}` files uploaded
-…
-
-WIP
-    """
-
-    UID_UNAME_INVALID = "Error happened, The user ID/username is probably invalid"
-
-    USER2_INFO = """
-`{}`
-
-**Direct link to profile :** tg://user?id={}
-    """
-
-    MAINTENANCE = """
-Do you want the bot to go in maintenance mode 🤔
-Current state : `{}`
-    """
-
-    MAINTENANCE_ASK = """
-False : No maintenance
-True : Maintenance
-Send the appropriate string
-    """
-
-    MAINTENANCE_DONE = "Successfully changed maintenance mode to `{}`"
-
-    MAINTENANCE_ON = """
-Maintenance mode is currently **ON**
-Tasks can't be processed. Come back later
-    """
-
-    MAINTENANCE_FAIL = "Provide one of the values"
-
     NO_THUMBS = "No thumbnails on the server yet"
 
     ERASE_ALL = "**Cleaning…**"
@@ -683,12 +612,6 @@ Tasks can't be processed. Come back later
 
     RESTARTING = "{} : Restarting…"
 
-    PULLING = "Pulling updates… ⌛"
-
-    PULLED = "✅ Pulled changes, restarting…"
-
-    NO_PULL = "Nothing to pull 😅"
-
     COMMANDS_LIST = """
 Here is the list of the commands you can use (only in private btw) :
 
@@ -696,41 +619,30 @@ Here is the list of the commands you can use (only in private btw) :
 **/start** : To know if I'm online
 **/help** : Gives a simple help
 **/about** : Know more about me
-**/donate** : Know how you can contribute to this bot
 **/clean** : Remove your files from my server. Also useful if a task failed
 **/mode** : Change your upload mode (either `doc` or `media`)
 **/stats** : Know all the current stats about me
 **/merge** : Merge splitted archives together
 **/done** : After you sent all the splitted archives, use this to merge them
-**/info** : Get full info about a [Message](https://docs.pyrogram.org/api/types/Message) (info returned by Pyrogram)
 **/addthumb** : Upload with a custom thumbnail
 **/delthumb** : Removes your thumbnail
 **/report** : Used by replying to a message, sends it to the bot owner (useful for bug report, or any question)
-**/vip** : __Not available yet__ Know more about the VIP subscription
     """
 
     ADMINCMD = """
 Here's all the commands that only the owner (you) can use :
 
-**/gitpull** : Pulls the latest changes from GitHub
+**/commands** : Users Commands
 **/broadcast** : Send something to all the users
-**/sendto {user_id}** : Same as broadcast but for a single user. Doesn't handle replies for now…
 **/ban {user_id}** : Ban an user. He can no longer use your bot, except if…
 **/unban {user_id}** : …you unban him. All his stats and settings stays saved after a ban
-**/user {user_id}** : Know more about the use of your bot by a single user
-**/user2 {user_id}** : Get full info about an [User](https://docs.pyrogram.org/api/types/User) (info returned by Pyrogram)
-**/self** : Get full info about me (info returned by Pyrogram)
 **/getthumbs** : Get all the thumbnails on the server
-**/redbutton** : __Does nothing yet__
-**/maintenance** : Put the bot in or out of maintenance mode. No tasks can be processed while on
 **/cleanall** : Same as `/clean`, but for the whole server
 **/cleantasks** : Same as `/cleanall`, plus removes them from the database
 **/logs** : Send you the logs (all of them). Useful for bug tracking. Send them to **@EDM115** if you don't understand them/need help
 **/restart** : Does a basic restart, less intrusive as the `/redbutton` one
-**/dbexport** : ~~Exports the whole database as CSV~~ __Does nothing yet__
 **/eval {code}** : Evaluate a piece of code. Useful for debugging
 **/exec {code}** : Execute a piece of code. Useful for debugging
-**/commands** : For all the other commands
     """
 
     # custom_thumbnail.py
@@ -815,42 +727,31 @@ class Buttons:
     CHOOSE_E_F__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("🗂️", callback_data="extract_file|tg_file|no_pass"),
-                InlineKeyboardButton(
-                    "🔐", callback_data="extract_file|tg_file|with_pass"
-                ),
+                InlineKeyboardButton("Extract 🗂️", callback_data="extract_file|tg_file|no_pass")
             ],
             [
-                InlineKeyboardButton("🖼️", callback_data="extract_file|tg_file|thumb"),
-                InlineKeyboardButton(
-                    "✏", callback_data="extract_file|tg_file|thumbrename"
-                ),
-            ],
-            [InlineKeyboardButton("❌", callback_data="cancel_dis")],
+                InlineKeyboardButton("❌", callback_data="cancel_dis")],
         ]
     )
 
     CHOOSE_E_F_M__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("🗂️", callback_data="merged|no_pass"),
-                InlineKeyboardButton("🔐", callback_data="merged|with_pass"),
+                InlineKeyboardButton("Merge 🗂️", callback_data="merged|no_pass"),
+                InlineKeyboardButton("Merge 🔐", callback_data="merged|with_pass"),
             ],
-            [InlineKeyboardButton("❌", callback_data="cancel_dis")],
+            [
+                InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
         ]
     )
 
     CHOOSE_E_U__BTNS = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("🔗", callback_data="extract_file|url|no_pass"),
-                InlineKeyboardButton("🔐", callback_data="extract_file|url|with_pass"),
+                InlineKeyboardButton("Extract 🔗", callback_data="extract_file|url|no_pass")
             ],
             [
-                InlineKeyboardButton("🖼️", callback_data="extract_file|url|thumb"),
-                InlineKeyboardButton("✏", callback_data="extract_file|url|thumbrename"),
-            ],
-            [InlineKeyboardButton("❌", callback_data="cancel_dis")],
+                InlineKeyboardButton("Cancel ❌", callback_data="cancel_dis")],
         ]
     )
 
