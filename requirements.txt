@@ -1,7 +1,7 @@
 pyrogram
 pyrofork
 python-dotenv
-ffmpeg-python
+ffmpeg
 aiocron==1.8
 aiofiles==24.1.0
 aiohttp==3.11.12
