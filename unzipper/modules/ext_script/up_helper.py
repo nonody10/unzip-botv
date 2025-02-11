@@ -69,7 +69,7 @@ async def send_file(unzip_bot, c_id, doc_f, query, full_path, log_msg, split):
         )
         if ul_mode == "media" and fext in extentions_list["audio"]:
             metadata = await get_audio_metadata(doc_f)
-            if fsize > 50 * 1024 * 1024 and thumbornot:
+            if thumbornot:
                 thumb_image = Config.THUMB_LOCATION + "/" + str(c_id) + ".jpg"
                 await unzip_bot.send_audio(
                     chat_id=c_id,
