@@ -22,10 +22,10 @@ class Config(object):
     THUMB_LOCATION = f"{os.path.dirname(__file__)}/Thumbnails"
     TG_MAX_SIZE = 2097152000
     MAX_MESSAGE_LENGTH = 4096
-    CHUNK_SIZE = 1024 * 1024 * 50  # 50 MB
+    CHUNK_SIZE = 1024 * 1024 * 10  # 10 MB
     BOT_THUMB = f"{os.path.dirname(__file__)}/bot_thumb.jpg"
-    MAX_CONCURRENT_TASKS = 75
-    MAX_TASK_DURATION_EXTRACT = 120 * 60  # 2 hours
-    MAX_TASK_DURATION_MERGE = 240 * 60  # 4 hours
+    MAX_CONCURRENT_TASKS = 10
+    MAX_TASK_DURATION_EXTRACT = 60 * 60  # 1 hours
+    MAX_TASK_DURATION_MERGE = 120 * 60  # 2 hours
 
 print("✅ Config Loaded Successfully!")
