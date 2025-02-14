@@ -126,13 +126,14 @@ Bot crashed 😪
     # callbacks.py
 
     MAX_TASKS = """
-Sorry, the bot is currently full 🥺
+**Sorry, The Bot is Currently Full 🥺**
+**Total Task Limit : 10**
 
-{} tasks are already running, please wait a few minutes
+**{} Tasks Are Already Running, Please Wait a few Minutes...**
     """
 
     CHOOSE_EXT_MODE = """
-Select the extraction mode for that {} 👀
+Select the Extraction Mode for that {} 👀
 
 🗂️ : **Extract/UnZip Files**
 🔐 : **Password Protected**
@@ -142,7 +143,7 @@ Select the extraction mode for that {} 👀
     """
 
     CHOOSE_EXT_MODE_MERGE = """
-Select the extraction mode for that merged file 👀
+Select the Extraction Mode for that Merged file 👀
 
 🗂️ : **Extract/UnZip Files**
 🔐 : **Password protected**
