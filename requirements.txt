@@ -1,5 +1,5 @@
 pyrogram
-pyrofork
+pyrofork==2.3.45
 python-dotenv
 mediainfo
 ffmpeg
