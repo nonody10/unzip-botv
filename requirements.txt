@@ -3,7 +3,7 @@ pyrofork
 python-dotenv
 mediainfo
 ffmpeg
-aiocron==1.8
+aiocron==2.1
 aiofiles==24.1.0
 aiohttp==3.11.12
 base58check==1.0.2
@@ -13,7 +13,7 @@ GitPython==3.1.44
 motor==3.7.0
 mutagen==1.47.0
 Pillow==11.1.0
-psutil==6.1.1
+psutil==7.0.0
 pykeyboard==0.1.5
 pyromod==1.5
 requests==2.32.3
