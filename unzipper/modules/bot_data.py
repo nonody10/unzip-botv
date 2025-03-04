@@ -231,7 +231,7 @@ Hi **{}** 👋, I'm **ProUnZipBot** 🥰
 
 I Can Extract Any Archive, Zip, RAR, With Password or Not, Also Splitted .001, .002, .00x Files. Send Me Files For Extract Here.
 
-**Made With ❤️ by @AdultService** ⚡
+**Made With ❤️ by @ORG_Prime** ⚡
     """
 
     HELP_TXT = """
@@ -257,7 +257,7 @@ I Can Extract Any Archive, Zip, RAR, With Password or Not, Also Splitted .001, .
 • **Framework :** [Pyrogram](https://pyrogram.org/)
 • **Developer :** [@ORGSupports](https://t.me/ORGSupports)
 
-Made with ❤️ by **@AdultService**
+Made with ❤️ by **@ORG_Prime**
     """
 
     DONATE_TEXT = """
