@@ -3,7 +3,7 @@ python-dotenv
 mediainfo
 ffmpeg
 python-ffmpeg
-aiocron==1.8
+aiocron==2.1
 aiofiles==24.1.0
 aiohttp==3.11.12
 base58check==1.0.2
@@ -15,8 +15,7 @@ mutagen==1.47.0
 Pillow==11.1.0
 psutil==7.0.0
 pykeyboard==0.1.5
-pyrogram==2.0.106
-pyromod==1.5
+pyromod
 requests==2.32.3
 TgCrypto==1.2.5
 unzip-http==0.6
