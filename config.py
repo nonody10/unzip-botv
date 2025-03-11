@@ -15,7 +15,7 @@ class Config(object):
     LOGS_CHANNEL = int(os.environ.get("LOGS_CHANNEL", "-1002057446010"))
     MONGODB_URL = os.environ.get("MONGODB_URL", "mongodb+srv://uhdprime:uhdprime@cluster0.ry5y4yk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
     MONGODB_DBNAME = os.environ.get("MONGODB_DBNAME", "Unzipper_Bot")
-    BOT_OWNER = int(os.environ.get("BOT_OWNER", "5309795821"))
+    BOT_OWNER = int(os.environ.get("BOT_OWNER", "7388366658"))
 
     # Constants
     DOWNLOAD_LOCATION = f"{os.path.dirname(__file__)}/Downloaded"
