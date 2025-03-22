@@ -153,7 +153,7 @@ Select the Extraction Mode for that Merged file 👀
     EXT_CAPTION = """
 `{}`
 
-**Join :- @AdultService**
+**Join :- @AdultXPrime**
     """
 
     REPORT_TEXT = """
