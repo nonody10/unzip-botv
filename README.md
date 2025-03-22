@@ -104,7 +104,8 @@ pip3 install -r requirements.txt
 + Install required dependencies  
   Arch Linux : `sudo pacman -S p7zip`  
   Ubuntu/Debian : `sudo apt-get install p7zip-full p7zip-rar`
-  `sudo apt-get install p7zip-full p7zip-rar`
+  `sudo apt-get install ffmpeg`
+  `pip install pyrogram ffmpeg-python`
 + Edit `.env` with your own values
 
 ```bash
