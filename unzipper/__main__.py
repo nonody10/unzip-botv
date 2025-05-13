@@ -2,9 +2,9 @@
 import os
 import signal
 import time
+import asyncio
 
 from keep_alive import keep_alive
-
 from pyrogram import idle
 
 from config import Config
@@ -26,23 +26,23 @@ def handler_stop_signals(signum, frame):
         signum,
         frame,
     )
-    shutdown_bot()
+    asyncio.run(shutdown_bot())  # updated to call async function properly
 
 
 signal.signal(signal.SIGINT, handler_stop_signals)
 signal.signal(signal.SIGTERM, handler_stop_signals)
 
 
-def shutdown_bot():
+async def shutdown_bot():
     stoptime = time.strftime("%Y/%m/%d - %H:%M:%S")
     LOGGER.info(Messages.STOP_TXT.format(stoptime))
     try:
-        unzipperbot.send_message(
+        await unzipperbot.send_message(
             chat_id=Config.LOGS_CHANNEL, text=Messages.STOP_TXT.format(stoptime)
         )
         with open("unzip-log.txt", "rb") as doc_f:
             try:
-                unzipperbot.send_document(
+                await unzipperbot.send_document(
                     chat_id=Config.LOGS_CHANNEL,
                     document=doc_f,
                     file_name=doc_f.name,
@@ -53,7 +53,11 @@ def shutdown_bot():
         LOGGER.error("Error sending shutdown message : %s", e)
     finally:
         LOGGER.info("Bot stopped 😪")
-        unzipperbot.stop(block=False)
+        try:
+            if unzipperbot.is_connected:
+                await unzipperbot.stop()
+        except:
+            pass
 
 
 if __name__ == "__main__":
@@ -84,8 +88,8 @@ if __name__ == "__main__":
                 )
             except:
                 pass
-            shutdown_bot()
+            asyncio.run(shutdown_bot())
     except Exception as e:
         LOGGER.error("Error in main loop : %s", e)
     finally:
-        shutdown_bot()
+        asyncio.run(shutdown_bot())
