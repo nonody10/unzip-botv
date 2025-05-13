@@ -26,5 +26,8 @@ RUN git clone https://github.com/orgservice/unzip-bot.git /app && \
 # Copy environment variables
 COPY .env /app/.env
 
+# Expose port for health check
+EXPOSE 8080
+
 # Run the bot
-CMD ["/bin/bash", "start.sh"]
+CMD ["python3", "-m", "unzipper"]
