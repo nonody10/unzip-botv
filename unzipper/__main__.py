@@ -3,6 +3,8 @@ import os
 import signal
 import time
 
+from keep_alive import keep_alive
+
 from pyrogram import idle
 
 from config import Config
@@ -59,6 +61,7 @@ if __name__ == "__main__":
         os.makedirs(Config.DOWNLOAD_LOCATION, exist_ok=True)
         os.makedirs(Config.THUMB_LOCATION, exist_ok=True)
         LOGGER.info(Messages.STARTING_BOT)
+        keep_alive()
         unzipperbot.start()
         starttime = time.strftime("%Y/%m/%d - %H:%M:%S")
         unzipperbot.send_message(
