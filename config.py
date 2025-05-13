@@ -6,16 +6,19 @@ load_dotenv()
 
 class Config(object):
     try:
-        APP_ID = int(os.environ.get("APP_ID", "24421857"))  # Default value to avoid NoneType error
+        APP_ID = int(os.environ.get("APP_ID", "20826111"))  # your API ID
     except ValueError:
         raise ValueError("❌ APP_ID must be a valid integer. Please check your environment variables.")
 
-    API_HASH = os.environ.get("API_HASH", "a3813a12d8cdf6f9231791704fc1d04d")
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "7736597933:AAF-4yAhAmo3WFVmbovtXaBzDuaRqpXL6p8")
-    LOGS_CHANNEL = int(os.environ.get("LOGS_CHANNEL", "-1002057446010"))
-    MONGODB_URL = os.environ.get("MONGODB_URL", "mongodb+srv://clone:clone@clone.omngv.mongodb.net/?retryWrites=true&w=majority")
+    API_HASH = os.environ.get("API_HASH", "7b6813d0d82891dd367b420b46133691")
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "7540535871:AAE6F0k7NBEn_m3s0wAEtT1HdmfqHvUI1ok")
+    LOGS_CHANNEL = int(os.environ.get("LOGS_CHANNEL", "-1002688784997"))
+    MONGODB_URL = os.environ.get(
+        "MONGODB_URL",
+        "mongodb+srv://nobodynote10:Nobody@cluster0.7fqavjv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    )
     MONGODB_DBNAME = os.environ.get("MONGODB_DBNAME", "UnzipperBot")
-    BOT_OWNER = int(os.environ.get("BOT_OWNER", "7388366658"))
+    BOT_OWNER = int(os.environ.get("BOT_OWNER", "8171174878"))
 
     # Constants
     DOWNLOAD_LOCATION = f"{os.path.dirname(__file__)}/Downloaded"
@@ -25,7 +28,7 @@ class Config(object):
     CHUNK_SIZE = 1024 * 1024 * 10  # 10 MB
     BOT_THUMB = f"{os.path.dirname(__file__)}/bot_thumb.jpg"
     MAX_CONCURRENT_TASKS = 15
-    MAX_TASK_DURATION_EXTRACT = 60 * 60  # 1 hours
+    MAX_TASK_DURATION_EXTRACT = 60 * 60  # 1 hour
     MAX_TASK_DURATION_MERGE = 120 * 60  # 2 hours
 
 print("✅ Config Loaded Successfully!")
